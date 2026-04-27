@@ -6,7 +6,9 @@ const apiKeyAuth = require("./middleware/apiKey");
 const app = express();
 
 // CORS — allow React dev server and Vercel deployments
-app.use(cors());
+app.use(cors({
+  origin: "*"
+}));
 
 app.use(express.json());
 
