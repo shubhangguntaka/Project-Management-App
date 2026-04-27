@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const apiKeyAuth = require("./middleware/apiKey");
 
@@ -17,10 +16,10 @@ app.use("/api/tasks", apiKeyAuth);
 app.use("/users", apiKeyAuth);
 app.use("/tasks", apiKeyAuth);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch(err => console.log("MongoDB Connection Error:", err.message));
+const connectDB = require("./config/db");
+
+// Establish Database Connection
+connectDB();
 
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
