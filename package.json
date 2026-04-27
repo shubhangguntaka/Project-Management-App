@@ -2,9 +2,9 @@
   "name": "project-management-app",
   "version": "1.0.0",
   "scripts": {
-    "server": "cd server && nodemon server.js",
-    "client": "cd client && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "cd server && node server.js",
+    "client": "cd client && node node_modules/react-scripts/scripts/start.js",
+    "dev": "concurrently \"cd server && node server.js\" \"cd client && node node_modules/react-scripts/scripts/start.js\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
