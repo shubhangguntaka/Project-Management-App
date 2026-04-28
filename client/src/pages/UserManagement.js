@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { userApi } from "../api";
 import UserModal from "../components/UserModal";
@@ -16,7 +16,7 @@ export default function UserManagement() {
     setTimeout(() => setToast(null), 3000);
   };
 
-  const fetchUsers = async () => {
+  const fetchUsers = useCallback(async () => {
     try {
       const res = await userApi.getAll();
       setUsers(res.data);
@@ -26,11 +26,11 @@ export default function UserManagement() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   const handleSave = async (formData) => {
     try {
