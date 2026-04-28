@@ -7,14 +7,17 @@ const app = express();
 
 // CORS — allow React dev server and Vercel deployments
 const allowedOrigins = [
-  "http://localhost:3000","https://project-management-app-ashy-nu.vercel.app/",
-  "https://project-management-app.shubhangguntaka.dev/",
+  "http://localhost:3000",
+  "https://project-management-app-ashy-nu.vercel.app",
+  "https://project-management-app.shubhangguntaka.dev",
   process.env.CLIENT_URL
 ].filter(Boolean);
 
 app.use(cors({
-  origin: allowedOrigins.length > 0 ? allowedOrigins : "*",
-  credentials: true
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "x-api-key", "Authorization"]
 }));
 
 app.use(express.json());
