@@ -2,12 +2,20 @@ import axios from "axios";
 
 /**
  * Configure the global API client.
- * Sets the baseURL dynamically depending on the environment.
+ *
+ * In production the React app is hosted on Vercel while the Express API
+ * lives on Render — a completely different domain — so baseURL must be
+ * an absolute URL (set via REACT_APP_API_URL in Vercel env vars).
+ *
+ * Locally we fall back to http://localhost:5000/api.
  */
+const API_BASE_URL =
+  process.env.REACT_APP_API_URL || "http://localhost:5000/api";
+
 const API = axios.create({
-  baseURL: process.env.NODE_ENV === "production" ? "/api" : "http://localhost:5000/api",
+  baseURL: API_BASE_URL,
   headers: {
-    "x-api-key": "utpatti-pm-api-key-2026",
+    "x-api-key": process.env.REACT_APP_API_KEY || "utpatti-pm-api-key-2026",
     "Content-Type": "application/json"
   }
 });
